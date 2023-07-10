@@ -1,0 +1,12 @@
+#!/bin/bash
+
+FILES="*.mp4"
+echo -n "Converting files."
+mkdir converted-videos >/dev/null 2>&1 
+for f in $FILES 
+do
+	ffmpeg -i $f -c:v dnxhd -profile:v dnxhr_hq -pix_fmt yuv422p -c:a pcm_s16le -f mov converted-videos/$f.mov >/dev/null 2>&1 
+	echo -n "."
+done
+echo
+echo "Done converting files."
